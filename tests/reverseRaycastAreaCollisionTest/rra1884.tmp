@@ -1,0 +1,63 @@
+[gd_scene load_steps=8 format=3 uid="uid://bjuvo7eqt4tx8"]
+
+[ext_resource type="Script" path="res://tests/reverseRaycastAreaCollisionTest/rractest.gd" id="1_1sy2t"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jrfup"]
+size = Vector3(2, 2, 2)
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_kr211"]
+bounce = 1.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_sg42q"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_r6ew1"]
+sky_top_color = Color(0, 0, 0, 1)
+sky_horizon_color = Color(0.5, 0.5, 0.5, 1)
+sky_energy_multiplier = 0.0
+ground_bottom_color = Color(0, 0, 0, 1)
+ground_horizon_color = Color(0.5, 0.5, 0.5, 1)
+
+[sub_resource type="Sky" id="Sky_s8cwt"]
+sky_material = SubResource("ProceduralSkyMaterial_r6ew1")
+
+[sub_resource type="Environment" id="Environment_lxrpn"]
+background_energy_multiplier = 0.0
+sky = SubResource("Sky_s8cwt")
+
+[node name="Rractest" type="Node3D"]
+
+[node name="Base" type="CSGBox3D" parent="."]
+use_collision = true
+
+[node name="Area3D" type="Area3D" parent="Base"]
+script = ExtResource("1_1sy2t")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Base/Area3D"]
+shape = SubResource("BoxShape3D_jrfup")
+
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.54339, 2.38419e-07)
+physics_material_override = SubResource("PhysicsMaterial_kr211")
+gravity_scale = 0.0
+linear_damp_mode = 1
+angular_damp_mode = 1
+constant_force = Vector3(0, -1, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+shape = SubResource("SphereShape3D_sg42q")
+
+[node name="intersectmesh" type="CSGSphere3D" parent="RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.19209e-07, -2.38419e-07)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.834829, 2.7305)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Camera3D"]
+omni_range = 7.651
+omni_attenuation = 1.103
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_lxrpn")
+
+[connection signal="body_shape_entered" from="Base/Area3D" to="Base/Area3D" method="on_body_shape_entered"]
+[connection signal="body_shape_exited" from="Base/Area3D" to="Base/Area3D" method="on_body_shape_exited"]

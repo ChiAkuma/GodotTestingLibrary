@@ -1,0 +1,17 @@
+# Godot 4+ specific ignores
+.godot/
+/android/
+export
+#addons
+#examples_dd3d
+#GodotExecutable
+#*.svg
+#*.ttf
+#*.png
+#*.jpg
+#*.exe
+#*.zip
+#*.7z
+#*.import
+#*.psd
+#
