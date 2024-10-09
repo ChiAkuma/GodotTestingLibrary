@@ -75,7 +75,7 @@ func _ready() -> void:
 	for node in exclude:
 		excludeRIDs.append(node.get_rid())
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	var space_rid: RID = get_world_3d().space
 	var space_state: PhysicsDirectSpaceState3D = PhysicsServer3D.space_get_direct_state(space_rid)
 	
@@ -111,24 +111,24 @@ func _physics_process(delta: float) -> void:
 		
 		#raycasts
 		var from: Vector3 = fromAreaResult["position"]
-		var range: float = 5
+		var rayRange: float = 5
 		#raycast up
-		raycast(space_state, node_path, [node.get_rid()], from, range, Direction.UP)
+		raycast(space_state, node_path, [node.get_rid()], from, rayRange, Direction.UP)
 		
 		#raycast down
-		raycast(space_state, node_path, [node.get_rid()], from, range, Direction.DOWN)
+		raycast(space_state, node_path, [node.get_rid()], from, rayRange, Direction.DOWN)
 		
 		#raycast back
-		raycast(space_state, node_path, [node.get_rid()], from, range, Direction.BACK)
+		raycast(space_state, node_path, [node.get_rid()], from, rayRange, Direction.BACK)
 		
 		#raycast forward
-		raycast(space_state, node_path, [node.get_rid()], from, range, Direction.FORWARD)
+		raycast(space_state, node_path, [node.get_rid()], from, rayRange, Direction.FORWARD)
 		
 		#raycast right
-		raycast(space_state, node_path, [node.get_rid()], from, range, Direction.RIGHT)
+		raycast(space_state, node_path, [node.get_rid()], from, rayRange, Direction.RIGHT)
 		
 		#raycast left
-		raycast(space_state, node_path, [node.get_rid()], from, range, Direction.LEFT)
+		raycast(space_state, node_path, [node.get_rid()], from, rayRange, Direction.LEFT)
 
 ## Raycast function
 func raycast(space_state: PhysicsDirectSpaceState3D, node_path: String, exclude: Array[RID], from: Vector3, length: float, side: int) -> void:
@@ -148,8 +148,8 @@ func raycast(space_state: PhysicsDirectSpaceState3D, node_path: String, exclude:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	DebugDraw2D.clear_all()
-	#DebugDraw2D.config.text_default_size = 15
-	DebugDraw2D.config.text_default_size = 25
+	DebugDraw2D.config.text_default_size = 14
+	#DebugDraw2D.config.text_default_size = 25
 	DebugDraw2D.config.text_background_color = Color.html("202020")
 	DebugDraw2D.config.text_padding = Vector2(20, 0)
 	var font: Font = load("res://Consolas.ttf")

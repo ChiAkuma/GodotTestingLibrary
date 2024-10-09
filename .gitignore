@@ -14,4 +14,4 @@ export
 #*.7z
 #*.import
 #*.psd
-#
+*.tmp
