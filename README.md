@@ -4,5 +4,5 @@ Godot 4.3 (.net) Version:   https://godotengine.org/download/
 
 
 Addon README:
-DebugDraw (Einfaches Debug Tool)
-[a relative link](addons/debug_draw_3d/README.md)
+DebugDraw (Einfaches Debug Text Tool)
+[DebugDraw README](addons/debug_draw_3d/README.md)
